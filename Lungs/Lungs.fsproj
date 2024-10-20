@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="Middlewares\Authorize.fs" />
+        <Compile Include="Middlewares\Middlewares.fs" />
+        <Compile Include="Routing.fs" />
+        <Compile Include="Program.fs"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Giraffe" Version="7.0.1" />
+      <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.8" />
+      <PackageReference Include="MongoDB.Bson" Version="3.0.0" />
+      <PackageReference Include="MongoDB.Driver" Version="3.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Registrations\Registrations.fsproj" />
+      <ProjectReference Include="..\Utils\Utils.fsproj" />
+    </ItemGroup>
+
+</Project>

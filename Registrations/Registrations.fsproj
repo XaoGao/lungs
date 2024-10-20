@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Database\Database.fsproj" />
+      <ProjectReference Include="..\Utils\Utils.fsproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Include="RegistrationRepository.fs" />
+      <Compile Include="RegistrationService.fs" />
+      <Compile Include="RegistrationHandler.fs" />
+      <Compile Include="RegistrationRouting.fs" />
+      <Compile Include="RegistrationConfigure.fs" />
+    </ItemGroup>
+
+</Project>
