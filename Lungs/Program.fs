@@ -9,6 +9,7 @@ open Giraffe
 open Utils.UtilsHandler
 open Lungs.Routing
 open Registrations.RegistrationConfigure
+open Sessions.SessionsConfigure
 
 let configureApp (app : IApplicationBuilder) =
     app
@@ -19,6 +20,7 @@ let configureServices (services : IServiceCollection) =
     services
         .AddGiraffe()
         .AddRegistrations()
+        .AddSessions()
     |> ignore
     
 let configureLogging (logging : ILoggingBuilder) =

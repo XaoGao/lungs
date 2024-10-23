@@ -7,7 +7,7 @@ open Microsoft.AspNetCore.Http
 open Utils.Responses
 
 module RegistrationHandler =
-    let create =
+    let registration =
         fun (next : HttpFunc) (ctx : HttpContext) ->
             task {
                 let! requestBody = ctx.BindJsonAsync<CreateUser>()
@@ -18,7 +18,7 @@ module RegistrationHandler =
                 | Error err -> return! logAndWriteError400 ctx "RegistrationHandler.Create" err
             }
             
-    let update (userId : string) : HttpHandler =
+    let editProfile (userId : string) : HttpHandler =
         fun (next : HttpFunc) (ctx : HttpContext) ->
             task {
                 let! requestBody = ctx.BindJsonAsync<UpdateUser>()
@@ -29,7 +29,7 @@ module RegistrationHandler =
                 | Error err -> return! logAndWriteError400 ctx "RegistrationHandler.Update" err
             }
             
-    let delete (userId : string) : HttpHandler =
+    let deleteProfile (userId : string) : HttpHandler =
         fun (next : HttpFunc) (ctx : HttpContext) ->
             task {
                 let registrationService = ctx.GetService<IRegistrationService>()

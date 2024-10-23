@@ -11,14 +11,16 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Include="RegistrationRepository.fs" />
-      <Compile Include="RegistrationService.fs" />
-      <Compile Include="RegistrationHandler.fs" />
-      <Compile Include="RegistrationRouting.fs" />
-      <Compile Include="RegistrationConfigure.fs" />
+        <Compile Include="SessionsDomain.fs" />
+        <Compile Include="SessionsRepository.fs" />
+        <Compile Include="SessionsService.fs" />
+        <Compile Include="SessionsHandler.fs" />
+        <Compile Include="SessionsRoutes.fs" />
+        <Compile Include="SessionsConfigure.fs" />
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="jose-jwt" Version="5.0.0" />
       <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.1.2" />
     </ItemGroup>
 

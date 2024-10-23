@@ -2,8 +2,8 @@ module Lungs.Routing
 
 open Giraffe
 open Registrations
+open Sessions
 open Utils.UtilsHandler
-open RegistrationRouting
 
 let routes : HttpFunc -> HttpFunc =
     choose [
@@ -11,5 +11,6 @@ let routes : HttpFunc -> HttpFunc =
             route "/"   >=> text "pong"
         ]
         RegistrationRouting.routes
+        SessionsRoutes.routes
         notFoundHandler
     ]
