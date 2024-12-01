@@ -1,7 +1,7 @@
 module Sessions.SessionsDomain
 
 [<CLIMutable>]
-type LoginModel = {
+type CreateSessionParams = {
     email : string
     password : string
 }

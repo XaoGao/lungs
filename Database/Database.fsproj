@@ -7,10 +7,10 @@
 
     <ItemGroup>
         <Compile Include="DB.fs" />
-        <Compile Include="Users.fs" />
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.0" />
       <PackageReference Include="MongoDB.Bson" Version="3.0.0" />
       <PackageReference Include="MongoDB.Driver" Version="3.0.0" />
       <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.1.2" />

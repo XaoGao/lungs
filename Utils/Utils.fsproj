@@ -7,10 +7,8 @@
 
     <ItemGroup>
         <Compile Include="Operations.fs" />
-        <Compile Include="UtilsHandler.fs" />
-        <Compile Include="Authorization.fs" />
+        <Compile Include="PasswordHelper.fs" />
         <Compile Include="Responses.fs" />
-        <Compile Include="JwtHelper.fs" />
     </ItemGroup>
 
     <ItemGroup>

@@ -1,36 +1,31 @@
 namespace Registrations
 
-
-open Database.Users
+open CommonDomain.Models
 open Microsoft.Extensions.Logging
 open MongoDB.Bson
 open RegistrationRepository
-
-open Utils.Authorization
+open Registrations.RegistrationDomain
+open Registrations.UserMapper
 
 module RegistrationService =
     type IRegistrationService =
-        abstract member CreateUser : CreateUser -> Result<User, string> 
-        abstract member UpdateUser : string -> UpdateUser -> Result<User, string>
-        abstract member DeleteUser : string -> Result<User, string> 
+        abstract member CreateUser : CreateUserParams -> Result<User, string> 
+        abstract member UpdateUser : string -> UpdateUserParams -> Result<User, string>
+        // abstract member DeleteUser : string -> Result<User, string> 
         
-    type RegistrationService(registrationRepository : IRegistrationRepository, logger : ILogger<RegistrationService>) =
+    type RegistrationService(registrationRepository : IRegistrationRepository,
+                             logger : ILogger<RegistrationService>) =
         interface IRegistrationService with
-            member _.CreateUser(createUser) : Result<User, string> =
+            member _.CreateUser(createUserParams) : Result<User, string> =
                 try
-                    let user = {
-                        Id = ObjectId.GenerateNewId()
-                        Name = createUser.Name
-                        Email = createUser.Email
-                        PasswordDigest = generatePasswordDigest createUser.Password
-                    }
+                    let user = toUser createUserParams
                     registrationRepository.CreateUser user
                     Ok user
                 with ex ->
                     logger.LogError(ex, "Error creating user")
                     Error "Error creating user" 
                     
-            member _.UpdateUser (userId : string) (updateUser : UpdateUser) : Result<User, string> =
+            member _.UpdateUser (userId : string) (updateUser : UpdateUserParams) : Result<User, string> =
                 try
                     let user = registrationRepository.FindById(ObjectId.Parse(userId))
                     match user with
@@ -44,16 +39,16 @@ module RegistrationService =
                 with ex ->
                     logger.LogError(ex, "Error updating user")
                     Error "Error updating user"
-        
-            member _.DeleteUser(userId) : Result<User, string> =
-                try
-                    let user = registrationRepository.FindById(ObjectId.Parse(userId))
-                    match user with
-                    | None -> Error "User not found" 
-                    | Some u ->
-                        match registrationRepository.DeleteUser u.Id with
-                        | None -> Error "Error deleting user" 
-                        | _ -> Ok u
-                with ex ->
-                    logger.LogError(ex, "Error deleting user")
-                    Error "Error deleting user"
+            
+            // member _.DeleteUser(userId) : Result<User, string> =
+            //     try
+            //         let user = registrationRepository.FindById(ObjectId.Parse(userId))
+            //         match user with
+            //         | None -> Error "User not found" 
+            //         | Some u ->
+            //             match registrationRepository.DeleteUser u.Id with
+            //             | None -> Error "Error deleting user" 
+            //             | _ -> Ok u
+            //     with ex ->
+            //         logger.LogError(ex, "Error deleting user")
+            //         Error "Error deleting user"

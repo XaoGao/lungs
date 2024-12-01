@@ -1,9 +1,10 @@
 module Lungs.Routing
 
 open Giraffe
+open SystemHandlers.NotFoundHandler
+
 open Registrations
 open Sessions
-open Utils.UtilsHandler
 
 let routes : HttpFunc -> HttpFunc =
     choose [

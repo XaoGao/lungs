@@ -1,4 +1,5 @@
-﻿open Microsoft.AspNetCore.Builder
+﻿open Lungs
+open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Hosting
 open Microsoft.Extensions.Hosting
 open Microsoft.Extensions.DependencyInjection
@@ -6,10 +7,11 @@ open Microsoft.Extensions.Logging
 
 open Giraffe
 
-open Utils.UtilsHandler
 open Lungs.Routing
 open Registrations.RegistrationConfigure
 open Sessions.SessionsConfigure
+open SystemHandlers.ErrorHandler
+
 
 let configureApp (app : IApplicationBuilder) =
     app

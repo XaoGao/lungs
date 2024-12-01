@@ -1,7 +1,7 @@
 module Sessions.SessionsRepository
 
 open Database.DB
-open Database.Users
+open CommonDomain.Models
 open MongoDB.Driver
 
 type ISessionsRepository =

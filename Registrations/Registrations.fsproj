@@ -6,11 +6,16 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Authorization\Authorization.fsproj" />
+      <ProjectReference Include="..\CommonDomain\CommonDomain.fsproj" />
       <ProjectReference Include="..\Database\Database.fsproj" />
       <ProjectReference Include="..\Utils\Utils.fsproj" />
     </ItemGroup>
 
     <ItemGroup>
+        <Compile Include="RegistrationDomain.fs" />
+        <Compile Include="UserMapper.fs" />
+        <Compile Include="Validations.fs" />
       <Compile Include="RegistrationRepository.fs" />
       <Compile Include="RegistrationService.fs" />
       <Compile Include="RegistrationHandler.fs" />

@@ -8,7 +8,4 @@ let routes : HttpHandler =
         POST >=> choose [
             route "/login" >=> login
         ]
-        DELETE >=> choose [
-            route "/logout" >=> logout
-        ]
     ]

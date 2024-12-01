@@ -6,6 +6,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Authorization\Authorization.fsproj" />
+      <ProjectReference Include="..\CommonDomain\CommonDomain.fsproj" />
       <ProjectReference Include="..\Database\Database.fsproj" />
       <ProjectReference Include="..\Utils\Utils.fsproj" />
     </ItemGroup>
@@ -20,7 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="jose-jwt" Version="5.0.0" />
+      <PackageReference Include="jose-jwt" Version="5.1.0" />
       <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.1.2" />
     </ItemGroup>
 
