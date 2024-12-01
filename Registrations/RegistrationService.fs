@@ -11,7 +11,7 @@ module RegistrationService =
     type IRegistrationService =
         abstract member CreateUser : CreateUserParams -> Result<User, string> 
         abstract member UpdateUser : string -> UpdateUserParams -> Result<User, string>
-        // abstract member DeleteUser : string -> Result<User, string> 
+        abstract member DeleteUser : string -> Result<User, string> 
         
     type RegistrationService(registrationRepository : IRegistrationRepository,
                              logger : ILogger<RegistrationService>) =
@@ -40,15 +40,15 @@ module RegistrationService =
                     logger.LogError(ex, "Error updating user")
                     Error "Error updating user"
             
-            // member _.DeleteUser(userId) : Result<User, string> =
-            //     try
-            //         let user = registrationRepository.FindById(ObjectId.Parse(userId))
-            //         match user with
-            //         | None -> Error "User not found" 
-            //         | Some u ->
-            //             match registrationRepository.DeleteUser u.Id with
-            //             | None -> Error "Error deleting user" 
-            //             | _ -> Ok u
-            //     with ex ->
-            //         logger.LogError(ex, "Error deleting user")
-            //         Error "Error deleting user"
+            member _.DeleteUser(userId) : Result<User, string> =
+                try
+                    let userOption = registrationRepository.FindById(ObjectId.Parse(userId))
+                    match userOption with
+                    | None -> Error "User not found" 
+                    | Some user ->
+                        match registrationRepository.DeleteUser user.Id with
+                        | None -> Error "Error deleting user" 
+                        | _ -> Ok user
+                with ex ->
+                    logger.LogError(ex, "Error deleting user")
+                    Error "Error deleting user"

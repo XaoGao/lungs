@@ -13,7 +13,7 @@ module RegistrationRouting =
             PUT >=> authorize >=> choose [
                 route "/edit_profile" >=> editProfile 
             ]
-            // DELETE >=> choose [
-            //     routef "/delete_profile/%s" deleteProfile 
-            // ]
+            DELETE >=> authorize >=> choose [
+                route "/delete_profile" >=> deleteProfile 
+            ]
         ]

@@ -11,7 +11,7 @@ module RegistrationRepository =
         abstract member CreateUser : User -> unit
         abstract member FindById : ObjectId -> User option
         abstract member UpdateUser : User -> User option
-        // abstract member DeleteUser : ObjectId -> unit option 
+        abstract member DeleteUser : ObjectId -> unit option 
         
     type RegistrationRepository() =
         interface IRegistrationRepository with
@@ -36,11 +36,11 @@ module RegistrationRepository =
                 | false -> None
                 | true -> Some newUser
                  
-            // member _.DeleteUser(id) =
-            //     let collection = conn().GetCollection<User>("users")
-            //     let filter = Builders<User>.Filter.Eq("_id", id)
-            //     let result = collection.DeleteOne(filter)
-            //     match result.IsAcknowledged with
-            //     | false -> None 
-            //     | true -> Some()
+            member _.DeleteUser(id) =
+                let collection = conn().GetCollection<User>("users")
+                let filter = Builders<User>.Filter.Eq("_id", id)
+                let result = collection.DeleteOne(filter)
+                match result.IsAcknowledged with
+                | false -> None 
+                | true -> Some()
  

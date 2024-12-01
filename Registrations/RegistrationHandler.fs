@@ -34,13 +34,14 @@ module RegistrationHandler =
                 | Ok user -> return! json user next ctx
                 | Error err -> return! badRequestLog ctx "RegistrationHandler.Update" err
             }
-    //         
-    // let deleteProfile (userId : string) : HttpHandler =
-    //     fun (next : HttpFunc) (ctx : HttpContext) ->
-    //         task {
-    //             let registrationService = ctx.GetService<IRegistrationService>()
-    //             let result = registrationService.DeleteUser userId 
-    //             match result with
-    //             | Ok user -> return! json user next ctx
-    //             | Error err -> return! badRequestLog ctx "RegistrationHandler.Delete" err
-            // }
+            
+    let deleteProfile : HttpHandler =
+        fun (next : HttpFunc) (ctx : HttpContext) ->
+            task {
+                let registrationService = ctx.GetService<IRegistrationService>()
+                let userId = ctx.User.FindFirst("Id").Value
+                let result = registrationService.DeleteUser userId 
+                match result with
+                | Ok user -> return! json user next ctx
+                | Error err -> return! badRequestLog ctx "RegistrationHandler.Delete" err
+            }
